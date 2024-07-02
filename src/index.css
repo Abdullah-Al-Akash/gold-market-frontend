@@ -5,13 +5,13 @@
 * {
     font-family: "Roboto Slab", serif;
     font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+    /* font-weight: 400; */
+    /* font-style: normal; */
   }
   
 
 .brand-color{
-    color: rgb(252, 197, 57)
+    color: rgb(253, 199, 63)
 }
 
 /* Example CSS */

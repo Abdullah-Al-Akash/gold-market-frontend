@@ -11,7 +11,7 @@ const Navbar = () => {
             <div className="navbar bg-gray-900 mt-0 lg:mt-1">
                 <div className="navbar-start">
                     <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                        <div tabIndex={0} role="button" className="btn btn-outline btn-warning lg:hidden">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5"
@@ -27,7 +27,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-gray-800 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             {navItems.map((item, index) => (
                                 <li key={index} className="brand-color">
                                     <Link to={item.to} className="nav-link">{item.name}</Link>
@@ -35,7 +35,7 @@ const Navbar = () => {
                             ))}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <a className="btn btn-ghost text-warning text-2xl">G<span className="text-white text-sm mt-2">old</span> M <span className="text-white text-sm mt-2">arket</span> </a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -47,7 +47,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <a className="btn btn-outline btn-warning">Login Here</a>
                 </div>
             </div>
         </div>
