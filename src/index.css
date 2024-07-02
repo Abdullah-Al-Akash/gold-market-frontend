@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: "Roboto Slab", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+.brand-color{
+    color: rgb(252, 197, 57)
+}
+
+/* Example CSS */
+
+
+.brand-color .nav-link:hover,
+.brand-color .nav-link:focus,
+.brand-color .nav-link:active {
+    /* Optional: Add hover, focus, and active styles */
+    color: rgb(252, 197, 57); /* Maintain white color */
+    /* Add any additional styles as needed */
+}
