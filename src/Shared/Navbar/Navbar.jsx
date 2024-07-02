@@ -7,8 +7,8 @@ const Navbar = () => {
     ];
 
     return (
-        <div className="">
-            <div className="navbar bg-gray-900 mt-0 lg:mt-1">
+        <div className="bg-black border-warning border-b-2">
+            <div className="navbar  mt-0 lg:mt-1">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-outline btn-warning lg:hidden">
