@@ -2,7 +2,7 @@ import image from "../../../assets/about.png";
 
 const AboutUs = () => {
     return (
-    <div className="hero min-h-screen text-white">
+    <div className="hero text-white">
         <div className="hero-content flex-col lg:flex-row-reverse">
             <div data-aos="fade-left" data-aos-duration="800" className="text-center w-full md:w-1/2 lg:text-left ms-0 md:ms-8">
                 <h1 className="text-2xl">About Us</h1>
