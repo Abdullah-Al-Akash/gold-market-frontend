@@ -6,9 +6,9 @@ const Banner = () => {
     return (
         <div>
             <WaterWave
-            className="h-[80vh]"
-        imageUrl={image}
-        dropRadius={30}
+            className="h-[60vh] md:h-[80vh]"
+            imageUrl={image}
+            dropRadius={30}
         // resolution={400}
         // interactive={false}
         style={{ width: '100%',  backgroundSize: 'contain',backgroundPosition: 'center',
