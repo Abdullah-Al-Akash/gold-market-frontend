@@ -1,6 +1,11 @@
 import { useContext, useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { getAuth, signOut } from "firebase/auth";
+import app from "../../Pages/firebase/firebase.config";
+import Swal from "sweetalert2";
+
+const auth = getAuth(app);
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
@@ -34,6 +39,23 @@ const Navbar = () => {
     setIsMenuVisible(false);
   }, [location]);
 
+  //   Logout:
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Logout Done",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
   const navItems = (
     <>
       <li className="brand-color">
@@ -122,7 +144,10 @@ const Navbar = () => {
             <>
               <div className="avatar online">
                 <div className="w-12 rounded-full hover:cursor-pointer">
-                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" onClick={handleImageClick}/>
+                  <img
+                    src="https://avatarfiles.alphacoders.com/838/83876.jpg"
+                    onClick={handleImageClick}
+                  />
                 </div>
               </div>
               {isMenuVisible && (
@@ -144,7 +169,7 @@ const Navbar = () => {
                     <button
                       className="block text-white"
                       onClick={() => {
-                        // handle logout
+                        logOut()
                       }}
                     >
                       Logout

@@ -4,8 +4,10 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import app from "../Pages/firebase/firebase.config";
+import Swal from "sweetalert2";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -30,7 +32,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("Current User",currentUser);
+      console.log("Current User", currentUser);
       setLoading(false);
     });
 
@@ -38,7 +40,25 @@ const AuthProvider = ({ children }) => {
       return unsubscribe;
     };
   }, []);
-  const authInfo = { createUser, loginUser, user, loading };
+
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Logout Done",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
+  const authInfo = { createUser, loginUser, user, loading, logOut };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
