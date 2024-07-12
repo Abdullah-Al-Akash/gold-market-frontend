@@ -1,5 +1,5 @@
 import { useContext, useState, useRef, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { getAuth, signOut } from "firebase/auth";
 import app from "../../Pages/firebase/firebase.config";
@@ -12,6 +12,7 @@ const Navbar = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuRef = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleImageClick = () => {
     setIsMenuVisible((prev) => !prev);
@@ -153,18 +154,14 @@ const Navbar = () => {
               {isMenuVisible && (
                 <ul
                   ref={menuRef}
-                  className="absolute right-0 top-10 mt-2 w-48 bg-gray-800 rounded-md shadow-lg z-50"
+                  className="absolute right-0 top-10 mt-2 w-32 bg-gray-800 rounded-md shadow-lg z-50"
                 >
                   <li className="p-2 border-b border-gray-700">
                     <Link to="/profile" className="block text-white">
                       Profile
                     </Link>
                   </li>
-                  <li className="p-2 border-b border-gray-700">
-                    <Link to="/settings" className="block text-white">
-                      Settings
-                    </Link>
-                  </li>
+                  
                   <li className="p-2">
                     <button
                       className="block text-white"
