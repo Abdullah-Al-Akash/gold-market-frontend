@@ -1,6 +1,39 @@
-import { Link } from "react-router-dom";
+import { useContext, useState, useRef, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const menuRef = useRef(null);
+  const location = useLocation();
+
+  const handleImageClick = () => {
+    setIsMenuVisible((prev) => !prev);
+  };
+
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsMenuVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isMenuVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuVisible]);
+
+  useEffect(() => {
+    setIsMenuVisible(false);
+  }, [location]);
+
   const navItems = (
     <>
       <li className="brand-color">
@@ -84,8 +117,47 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
-        <div className="navbar-end">
-          <Link to="/login" className="btn btn-outline btn-warning">Login Here</Link>
+        <div className="navbar-end relative">
+          {user?.email ? (
+            <>
+              <div className="avatar online">
+                <div className="w-12 rounded-full hover:cursor-pointer">
+                  <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" onClick={handleImageClick}/>
+                </div>
+              </div>
+              {isMenuVisible && (
+                <ul
+                  ref={menuRef}
+                  className="absolute right-0 top-10 mt-2 w-48 bg-gray-800 rounded-md shadow-lg z-50"
+                >
+                  <li className="p-2 border-b border-gray-700">
+                    <Link to="/profile" className="block text-white">
+                      Profile
+                    </Link>
+                  </li>
+                  <li className="p-2 border-b border-gray-700">
+                    <Link to="/settings" className="block text-white">
+                      Settings
+                    </Link>
+                  </li>
+                  <li className="p-2">
+                    <button
+                      className="block text-white"
+                      onClick={() => {
+                        // handle logout
+                      }}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </>
+          ) : (
+            <Link to="/login" className="btn btn-outline btn-warning">
+              Login Here
+            </Link>
+          )}
         </div>
       </div>
     </div>

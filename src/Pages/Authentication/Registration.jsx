@@ -23,6 +23,7 @@ const Registration = () => {
             const user = result?.user;
             console.log(user);
             if(user?.email){
+                //   Here Will be the backend code
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -30,7 +31,7 @@ const Registration = () => {
                     showConfirmButton: false,
                     timer: 1500
                   });
-                //   Here Will be the backend code
+                
                 navigate("/profile")
             }
             else{
