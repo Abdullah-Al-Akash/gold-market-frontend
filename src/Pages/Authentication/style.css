@@ -1,0 +1,7 @@
+.background {
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://i.pinimg.com/originals/87/1e/0c/871e0c812e42f97f3f9e8b2ac0384228.gif');
+    background-size: cover;
+    background-position: center;
+}
