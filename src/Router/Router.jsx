@@ -8,6 +8,7 @@ import Profile from "../Pages/MyProfile/Profile";
 import BuyGold from "../Pages/InteractionPage/BuyGold";
 import SellGold from "../Pages/InteractionPage/SellGold";
 import Transaction from "../Pages/InteractionPage/Transaction";
+import AdminPanel from "../Pages/AdminPanel/AdminPanel";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,14 @@ const router = createBrowserRouter([
         element: (
           <ProvateRoute>
             <Transaction></Transaction>
+          </ProvateRoute>
+        ),
+      },
+      {
+        path: "/admin-panel",
+        element: (
+          <ProvateRoute>
+            <AdminPanel></AdminPanel>
           </ProvateRoute>
         ),
       },
