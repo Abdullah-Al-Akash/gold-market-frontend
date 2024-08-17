@@ -5,6 +5,9 @@ import Login from "../Pages/Authentication/Login";
 import Registration from "../Pages/Authentication/Registration";
 import ProvateRoute from "./ProvateRoute";
 import Profile from "../Pages/MyProfile/Profile";
+import BuyGold from "../Pages/InteractionPage/BuyGold";
+import SellGold from "../Pages/InteractionPage/SellGold";
+import Transaction from "../Pages/InteractionPage/Transaction";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +31,30 @@ const router = createBrowserRouter([
         element: (
           <ProvateRoute>
             <Profile></Profile>
+          </ProvateRoute>
+        ),
+      },
+      {
+        path: "/buy",
+        element: (
+          <ProvateRoute>
+            <BuyGold></BuyGold>
+          </ProvateRoute>
+        ),
+      },
+      {
+        path: "/sell",
+        element: (
+          <ProvateRoute>
+            <SellGold></SellGold>
+          </ProvateRoute>
+        ),
+      },
+      {
+        path: "/transaction",
+        element: (
+          <ProvateRoute>
+            <Transaction></Transaction>
           </ProvateRoute>
         ),
       },
