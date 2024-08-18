@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login></Login>,
       },
       {
@@ -59,15 +59,7 @@ const router = createBrowserRouter([
           </ProvateRoute>
         ),
       },
-      {
-        path: "/admin-panel",
-        element: (
-          <ProvateRoute>
-            <AdminPanel></AdminPanel>
-          </ProvateRoute>
-        ),
-      },
-    ],
+    ]
   },
 ]);
 

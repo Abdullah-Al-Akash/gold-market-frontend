@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { Link } from "react-router-dom";
 import Routing from "../InteractionPage/Routing";
+import AdminPanel from "../AdminPanel/AdminPanel";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
@@ -15,6 +15,9 @@ const Profile = () => {
     setAmount(goldValue);
     setSellAmount(sellValue);
   };
+  if(user?.email == "akash@gmail.com"){
+    return <AdminPanel></AdminPanel>
+  }
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="text-center">
