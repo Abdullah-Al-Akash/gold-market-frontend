@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Routing from "../InteractionPage/Routing";
 import AdminPanel from "../AdminPanel/AdminPanel";
+import { Link, useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
   const [amount, setAmount] = useState(0);
+  const navigate = useNavigate();
   const [sellAmount, setSellAmount] = useState(0);
   console.log(user);
   const handleSell = (e) => {
@@ -15,8 +17,52 @@ const Profile = () => {
     setAmount(goldValue);
     setSellAmount(sellValue);
   };
-  if(user?.email == "akash@gmail.com"){
-    return <AdminPanel></AdminPanel>
+  if (user?.email == "akash@gmail.com") {
+    return (
+      <div>
+        <div className="drawer lg:drawer-open">
+          <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content flex flex-col items-center justify-center">
+            {/* Page content here */}
+            <label
+              htmlFor="my-drawer-2"
+              className="btn btn-primary drawer-button lg:hidden"
+            >
+              Open drawer
+            </label>
+            <h3 className="text-5xl text-center leading-relaxed">
+              Welcome <br /> To <br /> <span className="brand-color text-5xl">Gold Market</span> <br /> Admin Panel
+            </h3>
+          </div>
+          <div className="drawer-side">
+            <label
+              htmlFor="my-drawer-2"
+              aria-label="close sidebar"
+              className="drawer-overlay"
+            ></label>
+            <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+              {/* Sidebar content here */}
+              <li>
+                <Link to="/profile">
+                  <a>Home</a>
+                </Link>
+              </li>
+              <li>
+                <Link to="admin/users">
+                  <a>User List</a>
+                </Link>
+              </li>
+              <li>
+                <a>Pending Request</a>
+              </li>
+              <li>
+                <a>Transaction History</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
     <div className="min-h-screen flex justify-center items-center">

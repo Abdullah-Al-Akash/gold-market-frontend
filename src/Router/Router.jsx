@@ -9,6 +9,7 @@ import BuyGold from "../Pages/InteractionPage/BuyGold";
 import SellGold from "../Pages/InteractionPage/SellGold";
 import Transaction from "../Pages/InteractionPage/Transaction";
 import AdminPanel from "../Pages/AdminPanel/AdminPanel";
+import UserList from "../Pages/AdminPanel/UserList";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,14 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+    path: "profile",
+    element: <AdminPanel></AdminPanel>,
+    children: [{
+      path: "admin/users",
+      element: <UserList></UserList>
+    }]
+  }
 ]);
 
 export default router;

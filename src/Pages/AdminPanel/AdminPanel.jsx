@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Navbar from "../../Shared/Navbar/Navbar";
 import Footer from "../../Shared/Footer/Footer";
 
@@ -27,7 +27,10 @@ const AdminPanel = () => {
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             {/* Sidebar content here */}
             <li>
-              <a>User List</a>
+              <Link to="/profile"><a>Home</a></Link>
+            </li>
+            <li>
+              <Link to="admin/users"><a>User List</a></Link>
             </li>
             <li>
               <a>Pending Request</a>
