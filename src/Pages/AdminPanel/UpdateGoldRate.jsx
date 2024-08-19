@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import useCurrentRate from './../../hooks/buySellRate';
+import useCurrentRate from "./../../hooks/buySellRate";
 
 const UpdateGoldRate = () => {
   const { data, loading, error } = useCurrentRate();
@@ -9,7 +9,7 @@ const UpdateGoldRate = () => {
   // Handle form submission
   const updateData = async (event) => {
     event.preventDefault();
-    
+
     // Access form values
     const form = event.target;
     const userBuyRate = form.elements.buyRate.value;
@@ -33,18 +33,21 @@ const UpdateGoldRate = () => {
         const updatedData = {
           userBuyRate,
           userSellRate,
-          deliveryCharge
+          deliveryCharge,
         };
         console.log(updatedData);
-        
+
         // Replace 'id' with the actual ID if necessary
-        const response = await fetch(`https://example.com/api/resource/${currentRate._id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        });
+        const response = await fetch(
+          `http://localhost:5000/buy-sell-rate/${currentRate._id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedData),
+          }
+        );
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
