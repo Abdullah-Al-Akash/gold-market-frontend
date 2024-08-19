@@ -3,6 +3,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import Routing from "../InteractionPage/Routing";
 import AdminPanel from "../AdminPanel/AdminPanel";
 import { Link, useNavigate } from "react-router-dom";
+import { checkAdmin } from "../../hooks/checkAdmin";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
@@ -17,7 +18,7 @@ const Profile = () => {
     setAmount(goldValue);
     setSellAmount(sellValue);
   };
-  if (user?.email == "akash@gmail.com") {
+  if (checkAdmin(user?.email)) {
     return (
       <div>
         <div className="drawer lg:drawer-open">

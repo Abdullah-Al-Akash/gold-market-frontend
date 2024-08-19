@@ -27,6 +27,26 @@ const SellGold = () => {
   //     const amountInGm = parseFloat(e.target.value);
   //     setAmountInBdt(amountInGm*8620)
   //   };
+  // Sell Request:
+  const requestToSell = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Successfully Sent Your Request",
+          text: "Please Wait for Admin Response!",
+          icon: "success"
+        });
+      }
+    });
+  }
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="text-center">
@@ -84,7 +104,7 @@ const SellGold = () => {
             />
           </label>
           <div className="flex justify-end">
-            <button className="btn btn-success btn-wide mt-2 text-white text-xl font-normal">
+            <button onClick={requestToSell} className="btn btn-success btn-wide mt-2 text-white text-xl font-normal">
               Request to Sell
             </button>
           </div>

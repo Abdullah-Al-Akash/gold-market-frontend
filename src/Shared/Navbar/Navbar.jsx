@@ -161,17 +161,12 @@ const Navbar = () => {
                       Profile
                     </Link>
                   </li>
-                  <li className="p-2 border-b border-gray-700">
-                    <Link to="/admin-panel" className="block text-white">
-                      Admin Panel
-                    </Link>
-                  </li>
-                  
+
                   <li className="p-2">
                     <button
                       className="block text-white"
                       onClick={() => {
-                        logOut()
+                        logOut();
                       }}
                     >
                       Logout
