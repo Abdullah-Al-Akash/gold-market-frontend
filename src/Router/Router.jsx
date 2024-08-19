@@ -10,6 +10,7 @@ import SellGold from "../Pages/InteractionPage/SellGold";
 import Transaction from "../Pages/InteractionPage/Transaction";
 import AdminPanel from "../Pages/AdminPanel/AdminPanel";
 import UserList from "../Pages/AdminPanel/UserList";
+import UpdateGoldRate from "../Pages/AdminPanel/UpdateGoldRate";
 
 const router = createBrowserRouter([
   {
@@ -65,10 +66,16 @@ const router = createBrowserRouter([
   {
     path: "profile",
     element: <AdminPanel></AdminPanel>,
-    children: [{
+    children: [
+      {
       path: "admin/users",
       element: <UserList></UserList>
-    }]
+    },
+      {
+      path: "admin/update-gold-rate",
+      element: <UpdateGoldRate></UpdateGoldRate>
+    },
+  ]
   }
 ]);
 

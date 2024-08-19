@@ -2,10 +2,12 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import Navbar from "../../Shared/Navbar/Navbar";
 import Footer from "../../Shared/Footer/Footer";
+import { adminRouting } from "./AdminRouting";
 
 const AdminPanel = () => {
   return (
     <div>
+      <Navbar></Navbar>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center">
@@ -16,6 +18,7 @@ const AdminPanel = () => {
           >
             Open drawer
           </label>
+          
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
@@ -24,23 +27,12 @@ const AdminPanel = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-            {/* Sidebar content here */}
-            <li>
-              <Link to="/profile">Home</Link>
-            </li>
-            <li>
-              <Link to="admin/users">User List</Link>
-            </li>
-            <li>
-              <Link>Pending Request</Link>
-            </li>
-            <li>
-             <Link> Transaction History</Link>
-            </li>
-          </ul>
+          {
+            adminRouting
+          }
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

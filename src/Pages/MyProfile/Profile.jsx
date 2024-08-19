@@ -4,6 +4,7 @@ import Routing from "../InteractionPage/Routing";
 import AdminPanel from "../AdminPanel/AdminPanel";
 import { Link, useNavigate } from "react-router-dom";
 import { checkAdmin } from "../../hooks/checkAdmin";
+import { adminRouting } from "../AdminPanel/AdminRouting";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
@@ -41,25 +42,9 @@ const Profile = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-              {/* Sidebar content here */}
-              <li>
-                <Link to="/profile">
-                  <a>Home</a>
-                </Link>
-              </li>
-              <li>
-                <Link to="admin/users">
-                  <a>User List</a>
-                </Link>
-              </li>
-              <li>
-                <a>Pending Request</a>
-              </li>
-              <li>
-                <a>Transaction History</a>
-              </li>
-            </ul>
+            {
+              adminRouting
+            }
           </div>
         </div>
       </div>
