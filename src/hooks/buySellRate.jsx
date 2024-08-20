@@ -1,7 +1,7 @@
 // useFetchData.js
 import { useState, useEffect } from "react";
 
-const useCurrentRate = (url = 'http://localhost:5000/buy-sell-rate') => {
+const useCurrentRate = (url = 'https://gold-market-backend.onrender.com/buy-sell-rate') => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

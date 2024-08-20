@@ -4,6 +4,7 @@ import useCurrentRate from "../../../hooks/buySellRate";
 import currentUser from "../../../hooks/currentUser";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../Loading/Loading";
 
 const UpdateGoldRate = () => {
   const { data, loading, error } = useCurrentRate();
@@ -12,7 +13,7 @@ const UpdateGoldRate = () => {
   console.log(CUser,userLoading, userError);
   const navigate = useNavigate();
   if(userLoading){
-    return <>Loading</>
+    return <Loading></Loading>
   }
   if(CUser.email !== "akash@gmail.com"){
     navigate("/")
@@ -52,7 +53,7 @@ const UpdateGoldRate = () => {
 
         // Replace 'id' with the actual ID if necessary
         const response = await fetch(
-          `http://localhost:5000/buy-sell-rate/${currentRate._id}`,
+          `https://gold-market-backend.onrender.com/buy-sell-rate/${currentRate._id}`,
           {
             method: "PUT",
             headers: {

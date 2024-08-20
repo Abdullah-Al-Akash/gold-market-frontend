@@ -14,13 +14,10 @@ export const adminRouting = (
         <Link to="/admin/users">User List</Link>
       </li>
       <li>
-        <Link to="/admin/buy-request">Buy Request</Link>
+        <Link to="/admin/request">Request</Link>
       </li>
       <li>
-        <Link to="/admin/sell-request">Sell Request</Link>
-      </li>
-      <li>
-        <Link to="/admin/transaction-history"> Transaction History</Link>
+        {/* <Link to="/admin/transaction-history"> Transaction History</Link> */}
       </li>
     </ul>
   </>
