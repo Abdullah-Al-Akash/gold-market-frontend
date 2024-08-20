@@ -3,12 +3,20 @@ import Swal from "sweetalert2";
 import useCurrentRate from "../../../hooks/buySellRate";
 import currentUser from "../../../hooks/currentUser";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const UpdateGoldRate = () => {
   const { data, loading, error } = useCurrentRate();
   const{user} = useContext(AuthContext);
   const{CUser, userLoading, userError } = currentUser(user.email)
   console.log(CUser,userLoading, userError);
+  const navigate = useNavigate();
+  if(userLoading){
+    return <>Loading</>
+  }
+  if(CUser.email !== "akash@gmail.com"){
+    navigate("/")
+  }
   
   const currentRate = Array.isArray(data) && data.length > 0 ? data[0] : null;
   // Handle form submission

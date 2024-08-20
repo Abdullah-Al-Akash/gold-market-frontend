@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Routing from "./Routing";
 import Swal from "sweetalert2";
+import useCurrentRate from "../../hooks/buySellRate";
+import currentUser from "../../hooks/currentUser";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Loading from "../Loading/Loading";
 
 const BuyGold = () => {
+  const { user } = useContext(AuthContext);
+  const { CUser } = currentUser(user?.email);
   const [amountInBdt, setAmountInBdt] = useState(null);
   const [amountInGm, setAmountInGm] = useState(null);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [charge, setCharge] = useState(500);
+  const { data, loading } = useCurrentRate();
+
+  console.log(data?.deliveryCharge);
   const [interactionBtn, setInteractionBtn] = useState(false);
+
   const handleBuyInBdt = (e) => {
     let amountInBdt = parseFloat(e.target.value);
-    setAmountInBdt(amountInBdt)
+    setAmountInBdt(amountInBdt);
     if (amountInBdt < 0 || amountInBdt > 250000) {
       setAmountInBdt(null);
       Swal.fire({
@@ -20,17 +29,16 @@ const BuyGold = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      amountInBdt = "";
+      amountInBdt = null;
     }
-    setAmountInGm(amountInBdt / 8620);
-    setTotalAmount(amountInBdt + 500);
+    setAmountInGm(amountInBdt / parseFloat(data?.userBuyRate));
+    setTotalAmount(amountInBdt + parseFloat(data?.deliveryCharge));
   };
   //   const handleBuyInGm = (e) => {
   //     const amountInGm = parseFloat(e.target.value);
   //     setAmountInBdt(amountInGm*8620)
   //   };
   useEffect(() => {
-
     if (amountInBdt > 0 || amountInBdt < 250000) {
       setInteractionBtn(true);
     } else {
@@ -39,14 +47,23 @@ const BuyGold = () => {
   }, [amountInBdt]);
   // Buy Request
   const requestToBuy = async () => {
+    const date = new Date(); // Months are zero-based in JavaScript (6 = July)
+    const formattedDate = new Intl.DateTimeFormat("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(date);
     const goldData = {
-      amountInBdt: `${amountInBdt}BDT`,
-      charge: `${charge}BDT`,
-      totalAmount: `${totalAmount}BDT`,
+      CUser,
+      amountInBdt: `${amountInBdt}`,
+      amountInGm: amountInGm,
+      deliveryCharge: `${parseFloat(data?.deliveryCharge)}`,
+      totalAmount: `${totalAmount}`,
       requestType: "Buy",
-      status: "Pending"
-    }
-    console.log(goldData);
+      status: "Pending",
+      date: formattedDate
+    };
+
     try {
       // Show confirmation dialog
       const result = await Swal.fire({
@@ -58,25 +75,25 @@ const BuyGold = () => {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes",
       });
-  
+
       // If confirmed, make the POST request
       if (result.isConfirmed) {
-        const response = await fetch('http://localhost:5000/buy', {
-          method: 'POST',
+        const response = await fetch("http://localhost:5000/buy", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             // Add any other headers if needed
           },
           body: JSON.stringify(goldData),
         });
-  
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-  
+
         const data = await response.json();
         console.log(data);
-  
+
         // Show success alert
         await Swal.fire({
           title: "Successfully Sent Your Request",
@@ -85,8 +102,8 @@ const BuyGold = () => {
         });
       }
     } catch (error) {
-      console.error('Error making POST request:', error);
-  
+      console.error("Error making POST request:", error);
+
       // Show error alert if request fails
       await Swal.fire({
         title: "Error",
@@ -95,6 +112,10 @@ const BuyGold = () => {
       });
     }
   };
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="text-center">
@@ -135,7 +156,7 @@ const BuyGold = () => {
               placeholder="Max 25 Gm"
               min="0"
               max="25"
-              value={charge}
+              value={data?.deliveryCharge}
               readOnly
             />
           </label>
@@ -152,7 +173,10 @@ const BuyGold = () => {
             />
           </label>
           <div className="flex justify-end">
-            <button onClick={requestToBuy} className="btn btn-success btn-wide mt-2 text-white text-xl font-normal">
+            <button
+              onClick={requestToBuy}
+              className="btn btn-success btn-wide mt-2 text-white text-xl font-normal"
+            >
               Request to Buy
             </button>
           </div>
