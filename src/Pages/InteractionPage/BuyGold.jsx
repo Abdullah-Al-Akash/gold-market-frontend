@@ -30,7 +30,7 @@ const BuyGold = () => {
   //     setAmountInBdt(amountInGm*8620)
   //   };
   useEffect(() => {
-    console.log(amountInBdt);
+
     if (amountInBdt > 0 || amountInBdt < 250000) {
       setInteractionBtn(true);
     } else {

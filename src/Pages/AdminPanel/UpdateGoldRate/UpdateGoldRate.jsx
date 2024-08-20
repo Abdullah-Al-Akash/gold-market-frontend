@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import Swal from "sweetalert2";
-import useCurrentRate from "./../../hooks/buySellRate";
+import useCurrentRate from "../../../hooks/buySellRate";
+import currentUser from "../../../hooks/currentUser";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const UpdateGoldRate = () => {
   const { data, loading, error } = useCurrentRate();
+  const{user} = useContext(AuthContext);
+  const{CUser, userLoading, userError } = currentUser(user.email)
+  console.log(CUser,userLoading, userError);
+  
   const currentRate = Array.isArray(data) && data.length > 0 ? data[0] : null;
-
   // Handle form submission
   const updateData = async (event) => {
     event.preventDefault();

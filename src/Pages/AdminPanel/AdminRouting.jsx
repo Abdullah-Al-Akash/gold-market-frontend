@@ -8,16 +8,19 @@ export const adminRouting = (
         <Link to="/profile">Home</Link>
       </li>
       <li>
-        <Link to="admin/update-gold-rate">Update Gold Rate</Link>
+        <Link to="/admin/update-gold-rate">Update Gold Rate</Link>
       </li>
       <li>
-        <Link to="admin/users">User List</Link>
+        <Link to="/admin/users">User List</Link>
       </li>
       <li>
-        <Link>Pending Request</Link>
+        <Link to="/admin/buy-request">Buy Request</Link>
       </li>
       <li>
-        <Link> Transaction History</Link>
+        <Link to="/admin/sell-request">Sell Request</Link>
+      </li>
+      <li>
+        <Link to="/admin/transaction-history"> Transaction History</Link>
       </li>
     </ul>
   </>

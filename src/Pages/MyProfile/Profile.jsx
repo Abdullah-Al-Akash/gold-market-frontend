@@ -1,15 +1,13 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Routing from "../InteractionPage/Routing";
-import AdminPanel from "../AdminPanel/AdminPanel";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { checkAdmin } from "../../hooks/checkAdmin";
 import { adminRouting } from "../AdminPanel/AdminRouting";
 
 const Profile = () => {
-  const { user } = useContext(AuthContext);
+  const { loading,user } = useContext(AuthContext);
   const [amount, setAmount] = useState(0);
-  const navigate = useNavigate();
   const [sellAmount, setSellAmount] = useState(0);
   console.log(user);
   const handleSell = (e) => {

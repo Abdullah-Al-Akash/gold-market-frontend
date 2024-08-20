@@ -3,14 +3,15 @@ import Home from "../Pages/HomePage/Home/Home";
 import Main from "../Layout/Main";
 import Login from "../Pages/Authentication/Login";
 import Registration from "../Pages/Authentication/Registration";
-import ProvateRoute from "./ProvateRoute";
+import PrivateRoute from "./PrivateRoute";
 import Profile from "../Pages/MyProfile/Profile";
 import BuyGold from "../Pages/InteractionPage/BuyGold";
 import SellGold from "../Pages/InteractionPage/SellGold";
 import Transaction from "../Pages/InteractionPage/Transaction";
 import AdminPanel from "../Pages/AdminPanel/AdminPanel";
-import UserList from "../Pages/AdminPanel/UserList";
-import UpdateGoldRate from "../Pages/AdminPanel/UpdateGoldRate";
+import UpdateGoldRate from "../Pages/AdminPanel/UpdateGoldRate/UpdateGoldRate";
+import AdminUserList from "../Pages/AdminPanel/UserList/AdminUserList";
+import AdminUpdateGoldRate from "../Pages/AdminPanel/UpdateGoldRate/AdminUpdateGoldRate";
 
 const router = createBrowserRouter([
   {
@@ -32,48 +33,62 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: (
-          <ProvateRoute>
+          <PrivateRoute>
             <Profile></Profile>
-          </ProvateRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/buy",
         element: (
-          <ProvateRoute>
+          <PrivateRoute>
             <BuyGold></BuyGold>
-          </ProvateRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/sell",
         element: (
-          <ProvateRoute>
+          <PrivateRoute>
             <SellGold></SellGold>
-          </ProvateRoute>
+          </PrivateRoute>
         ),
       },
       {
         path: "/transaction",
         element: (
-          <ProvateRoute>
+          <PrivateRoute>
             <Transaction></Transaction>
-          </ProvateRoute>
+          </PrivateRoute>
         ),
       },
+      {
+        path: "/admin/users",
+        element: 
+          <PrivateRoute>
+            <AdminUserList></AdminUserList>
+          </PrivateRoute>
+      },
+      {
+        path: "admin/update-gold-rate",
+        element: <PrivateRoute>
+          <AdminUpdateGoldRate></AdminUpdateGoldRate>
+        </PrivateRoute>
+      }
     ]
   },
   {
     path: "profile",
-    element: <AdminPanel></AdminPanel>,
+    element: <PrivateRoute>
+      <AdminPanel></AdminPanel>
+    </PrivateRoute>,
     children: [
-      {
-      path: "admin/users",
-      element: <UserList></UserList>
-    },
+      
       {
       path: "admin/update-gold-rate",
-      element: <UpdateGoldRate></UpdateGoldRate>
+      element: <PrivateRoute>
+        <UpdateGoldRate></UpdateGoldRate>
+      </PrivateRoute>
     },
   ]
   }
