@@ -6,10 +6,13 @@ import { checkAdmin } from "../../hooks/checkAdmin";
 import { adminRouting } from "../AdminPanel/AdminRouting";
 import currentUser from "../../hooks/currentUser";
 import Loading from "../Loading/Loading";
+import useCurrentRate from "../../hooks/buySellRate";
 
 const Profile = () => {
   const { loading, user } = useContext(AuthContext);
   const UserDetails = currentUser(user?.email);
+  const{ data} = useCurrentRate();
+  console.log(data);
   console.log(UserDetails);
   const {CUser, userLoading} = UserDetails;
   const [amount, setAmount] = useState(0);
@@ -93,7 +96,7 @@ const Profile = () => {
               className="grow ms-10"
               placeholder=""
               min="0"
-              value={amount.toLocaleString() + " BDT"}
+              value={(CUser?.myVault * data?.userBuyRate).toLocaleString() + " BDT"}
               readOnly
             />
           </label>
@@ -104,7 +107,7 @@ const Profile = () => {
               className="grow ms-10"
               placeholder=""
               min="0"
-              value={sellAmount.toLocaleString() + " BDT"}
+              value={(CUser?.myVault * data?.userSellRate).toLocaleString() + " BDT"}
               readOnly
             />
           </label>

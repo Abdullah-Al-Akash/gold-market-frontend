@@ -146,7 +146,7 @@ const SellGold = () => {
             />
           </label>
           <label className="input input-bordered flex items-center gap-2 mt-2">
-            <span className="brand-color w-1/2">You need to pay = </span>
+            <span className="brand-color w-1/2">You will get(BDT) = </span>
             <input
               type="number"
               className="grow ms-10"

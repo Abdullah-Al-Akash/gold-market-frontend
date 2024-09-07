@@ -4,11 +4,14 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { getAuth, signOut } from "firebase/auth";
 import app from "../../Pages/firebase/firebase.config";
 import Swal from "sweetalert2";
+import currentUser from "../../hooks/currentUser";
 
 const auth = getAuth(app);
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
+  const { CUser } = currentUser(user?.email);
+  console.log(CUser);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuRef = useRef(null);
   const location = useLocation();
@@ -72,6 +75,25 @@ const Navbar = () => {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
+              d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            />
+          </svg>
+          Home
+        </Link>
+      </li>
+      <li className="brand-color">
+        <Link to="/buy" className="font-semibold text-lg nav-link">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
             />
           </svg>
@@ -79,7 +101,7 @@ const Navbar = () => {
         </Link>
       </li>
       <li className="brand-color">
-        <Link to="/" className="font-semibold text-lg nav-link">
+        <Link to="/sell" className="font-semibold text-lg nav-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -143,6 +165,9 @@ const Navbar = () => {
         <div className="navbar-end relative">
           {user?.email ? (
             <>
+              <h3 className="brand-color font-semibold me-2">
+                {CUser?.myVault}
+              </h3>
               <div className="avatar online">
                 <div className="w-12 rounded-full hover:cursor-pointer">
                   <img
