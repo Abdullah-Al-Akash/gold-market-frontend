@@ -27,7 +27,7 @@ const Registration = () => {
 
             if (existingUser?.email) {
                 // Make a POST request to your backend to save additional user data
-                const response = await fetch('https://gold-market-backend.onrender.com/addUser', {
+                const response = await fetch('http://localhost:5000/addUser', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

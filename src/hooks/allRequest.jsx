@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const allRequest = () => {
-  const url = `https://gold-market-backend.onrender.com/request`;
+  const url = `http://localhost:5000/request`;
   const [request, setRequest] = useState(null);
   const [requestLoading, setRequestLoading] = useState(true);
   const [requestError, setRequestError] = useState(null);

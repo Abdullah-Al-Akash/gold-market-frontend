@@ -18,10 +18,10 @@ const BuyGold = () => {
   const [interactionBtn, setInteractionBtn] = useState(false);
 
   const handleBuyInBdt = (e) => {
-    let amountInBdt = parseFloat(e.target.value);
-    setAmountInBdt(amountInBdt);
-    if (amountInBdt < 0 || amountInBdt > 250000) {
-      setAmountInBdt(null);
+    let amountInGm = parseFloat(e.target.value);
+    setAmountInGm(amountInGm);
+    if (amountInGm < 0 || amountInGm > 80) {
+      setAmountInGm(null);
       Swal.fire({
         position: "center",
         icon: "error",
@@ -29,22 +29,22 @@ const BuyGold = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      amountInBdt = null;
+      amountInGm = null;
     }
-    setAmountInGm(amountInBdt / parseFloat(data?.userBuyRate));
-    setTotalAmount(amountInBdt + parseFloat(data?.deliveryCharge));
+    setAmountInBdt(amountInGm * parseFloat(data?.userBuyRate));
+    setTotalAmount(
+      amountInGm * parseFloat(data?.userBuyRate) +
+        parseFloat(data?.deliveryCharge)
+    );
   };
-  //   const handleBuyInGm = (e) => {
-  //     const amountInGm = parseFloat(e.target.value);
-  //     setAmountInBdt(amountInGm*8620)
-  //   };
+
   useEffect(() => {
-    if (amountInBdt > 0 || amountInBdt < 250000) {
+    if (amountInGm > 0 && amountInGm <= 80) {
       setInteractionBtn(true);
     } else {
       setInteractionBtn(false);
     }
-  }, [amountInBdt]);
+  }, [amountInGm]);
   // Buy Request
   const requestToBuy = async () => {
     const date = new Date(); // Months are zero-based in JavaScript (6 = July)
@@ -61,7 +61,7 @@ const BuyGold = () => {
       totalAmount: `${totalAmount}`,
       requestType: "Buy",
       status: "Pending",
-      date: formattedDate
+      date: formattedDate,
     };
 
     try {
@@ -78,7 +78,7 @@ const BuyGold = () => {
 
       // If confirmed, make the POST request
       if (result.isConfirmed) {
-        const response = await fetch("https://gold-market-backend.onrender.com/buy", {
+        const response = await fetch("http://localhost:5000/buy", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -125,26 +125,27 @@ const BuyGold = () => {
         </h3>
         <div className="my-10">
           <label className="input input-bordered flex items-center gap-2">
-            <span className="brand-color w-1/2">Enter Amount in BDT = </span>
+            <span className="brand-color w-1/2">
+              Enter amount of Gold(gram)={" "}
+            </span>
             <input
-              onChange={handleBuyInBdt}
               type="number"
               className="grow ms-10"
-              placeholder="Max 2.5 Lac"
+              placeholder="Max 80 Gm"
               min="0"
-              max="250000"
-              value={amountInBdt}
+              max="80"
+              onChange={handleBuyInBdt}
             />
           </label>
           <label className="input input-bordered flex items-center gap-2 mt-2">
-            <span className="brand-color w-1/2">You Will Get Gold(gram)= </span>
+            <span className="brand-color w-1/2">You need to pay = </span>
             <input
               type="number"
               className="grow ms-10"
-              placeholder="Max 25 Gm"
+              placeholder=""
               min="0"
-              max="25"
-              value={`${amountInGm}`}
+              max="250000"
+              value={amountInBdt}
               readOnly
             />
           </label>
@@ -175,6 +176,8 @@ const BuyGold = () => {
           <div className="flex justify-end">
             <button
               onClick={requestToBuy}
+              disabled={!interactionBtn}
+              type="button"
               className="btn btn-success btn-wide mt-2 text-white text-xl font-normal"
             >
               Request to Buy

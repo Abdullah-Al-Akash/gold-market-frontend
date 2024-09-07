@@ -53,7 +53,7 @@ const UpdateGoldRate = () => {
 
         // Replace 'id' with the actual ID if necessary
         const response = await fetch(
-          `https://gold-market-backend.onrender.com/buy-sell-rate/${currentRate._id}`,
+          `http://localhost:5000/buy-sell-rate/${currentRate._id}`,
           {
             method: "PUT",
             headers: {

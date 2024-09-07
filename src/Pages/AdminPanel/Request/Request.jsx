@@ -9,7 +9,7 @@ const Request = () => {
   }
   const approveBtn = async (id) => {
     try {
-        const response = await fetch(`https://gold-market-backend.onrender.com/request/${id}`, {
+        const response = await fetch(`http://localhost:5000/request/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const Request = () => {
                 {/* row 1 */}
                 {requestLength == 0 ? (
                   <div>
-                    <h2>You have no transaction history!</h2>
+                    <h2 className="text-center mx-auto">You have no transaction history!</h2>
                   </div>
                 ) : (
                   request?.map((r, index) => (
