@@ -32,7 +32,10 @@ const Transaction = () => {
                   <th className="md:text-xl text-lg text-black">Type</th>
                   <th className="md:text-xl text-lg text-black">Gold Amount</th>
                   <th className="md:text-xl text-lg text-black">
-                    Total Payment
+                    Payment
+                  </th>
+                  <th className="md:text-xl text-lg text-black">
+                    Status
                   </th>
                 </tr>
               </thead>
@@ -56,6 +59,10 @@ const Transaction = () => {
                         <td className=" brand-color">
                             {history?.totalAmount // Format totalAmount to 2 decimal places
                                } BDT
+                        </td>
+                        <td className={`${history?.status == "Pending"? "text-red-500" : "text-green-500"}`}>
+                            {history?.status // Format totalAmount to 2 decimal places
+                               }
                         </td>
                     </tr>
                 ))

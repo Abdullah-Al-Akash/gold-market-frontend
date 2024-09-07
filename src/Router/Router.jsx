@@ -13,6 +13,7 @@ import UpdateGoldRate from "../Pages/AdminPanel/UpdateGoldRate/UpdateGoldRate";
 import AdminUserList from "../Pages/AdminPanel/UserList/AdminUserList";
 import AdminUpdateGoldRate from "../Pages/AdminPanel/UpdateGoldRate/AdminUpdateGoldRate";
 import AdminRequest from "../Pages/AdminPanel/Request/AdminRequest";
+import AdminReport from "../Pages/AdminPanel/AdminReport/AdminReport";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,12 @@ const router = createBrowserRouter([
         path: "admin/request",
         element: <PrivateRoute>
           <AdminRequest></AdminRequest>
+        </PrivateRoute>
+      },
+      {
+        path: "admin/report",
+        element: <PrivateRoute>
+          <AdminReport></AdminReport>
         </PrivateRoute>
       }
     ]

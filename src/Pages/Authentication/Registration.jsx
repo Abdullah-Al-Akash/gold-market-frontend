@@ -16,8 +16,9 @@ const Registration = () => {
         const phoneNumber = form.phoneNumber.value;
         const referenceId = form.referenceId.value;
         const password = form.password.value;
+        const myVault = 0;
 
-        const user = { name, email, phoneNumber, referenceId };
+        const user = { name, email, phoneNumber, referenceId, myVault };
         console.log(user);
 
         try {

@@ -7,14 +7,15 @@ const Request = () => {
   if (requestLoading) {
     return <Loading></Loading>;
   }
-  const approveBtn = async (id) => {
+  const approveBtn = async (id, userId, requestType, amountInGm, amountInBdt) => {
+    console.log(id);
     try {
         const response = await fetch(`http://localhost:5000/request/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ status: "Approved" }),
+            body: JSON.stringify({ status: "Approved", requestType, amountInGm, amountInBdt,userId }),
         });
 
         if (!response.ok) {
@@ -105,7 +106,7 @@ const Request = () => {
                       </td>
                       <td className="text-white">
                         <button
-                          onClick={() => approveBtn(r?._id)}
+                          onClick={() => approveBtn(r?._id, r?.CUser?._id, r?.requestType, r?.amountInGm, r?.amountInBdt)}
                           className="btn-sm btn font-thin btn-success"
                           disabled={r.status == "Approved"}
                         >

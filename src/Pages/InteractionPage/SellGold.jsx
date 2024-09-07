@@ -78,6 +78,14 @@ const SellGold = () => {
 
       // If confirmed, make the POST request
       if (result.isConfirmed) {
+        // Condition is greater or less from myvault:
+        if(CUser?.myVault < amountInGm){
+          return Swal.fire({
+            title: "Error",
+            text: "Insuficiant Amount of Gold",
+            icon: "error",
+          })
+        }
         const response = await fetch("http://localhost:5000/buy", {
           method: "POST",
           headers: {

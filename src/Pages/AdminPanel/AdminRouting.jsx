@@ -8,6 +8,9 @@ export const adminRouting = (
         <Link to="/profile">Home</Link>
       </li>
       <li>
+        <Link to="/admin/report">Admin Report</Link>
+      </li>
+      <li>
         <Link to="/admin/update-gold-rate">Update Gold Rate</Link>
       </li>
       <li>
@@ -16,6 +19,7 @@ export const adminRouting = (
       <li>
         <Link to="/admin/request">Request</Link>
       </li>
+      
       <li>
         {/* <Link to="/admin/transaction-history"> Transaction History</Link> */}
       </li>

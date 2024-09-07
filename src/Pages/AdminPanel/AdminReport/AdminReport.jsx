@@ -1,10 +1,10 @@
-import React from "react";
-import UpdateGoldRate from "./UpdateGoldRate";
-import { adminRouting } from "../AdminRouting";
+import React from 'react';
+import { adminRouting } from '../AdminRouting';
+import Report from './Report';
 
-const AdminUpdateGoldRate = () => {
-  return (
-    <div className="drawer lg:drawer-open">
+const AdminReport = () => {
+    return (
+        <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center">
         {/* Page content here */}
@@ -15,7 +15,7 @@ const AdminUpdateGoldRate = () => {
           Open drawer
         </label>
 
-        <UpdateGoldRate></UpdateGoldRate>
+        <Report></Report>
       </div>
       <div className="drawer-side">
         <label
@@ -26,7 +26,7 @@ const AdminUpdateGoldRate = () => {
         {adminRouting}
       </div>
     </div>
-  );
+    );
 };
 
-export default AdminUpdateGoldRate;
+export default AdminReport;

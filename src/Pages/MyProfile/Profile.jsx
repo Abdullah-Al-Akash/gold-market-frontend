@@ -4,9 +4,14 @@ import Routing from "../InteractionPage/Routing";
 import { useNavigate } from "react-router-dom";
 import { checkAdmin } from "../../hooks/checkAdmin";
 import { adminRouting } from "../AdminPanel/AdminRouting";
+import currentUser from "../../hooks/currentUser";
+import Loading from "../Loading/Loading";
 
 const Profile = () => {
-  const { loading,user } = useContext(AuthContext);
+  const { loading, user } = useContext(AuthContext);
+  const UserDetails = currentUser(user?.email);
+  console.log(UserDetails);
+  const {CUser, userLoading} = UserDetails;
   const [amount, setAmount] = useState(0);
   const [sellAmount, setSellAmount] = useState(0);
   console.log(user);
@@ -31,7 +36,9 @@ const Profile = () => {
               Open drawer
             </label>
             <h3 className="text-5xl text-center leading-relaxed">
-              Welcome <br /> To <br /> <span className="brand-color text-5xl">Gold Market</span> <br /> Admin Panel
+              Welcome <br /> To <br />{" "}
+              <span className="brand-color text-5xl">Gold Market</span> <br />{" "}
+              Admin Panel
             </h3>
           </div>
           <div className="drawer-side">
@@ -40,19 +47,21 @@ const Profile = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            {
-              adminRouting
-            }
+            {adminRouting}
           </div>
         </div>
       </div>
     );
   }
+  if(userLoading){
+    return <Loading></Loading>
+  }
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="text-center">
-        <h3>Welcome to your Profile</h3>
-        <h2>Login email: {user?.email}</h2>
+        <h3>Welcome to {CUser?.name}</h3>
+        <h2>Email: {CUser?.email}</h2>
+        <h2>Phone: {CUser?.phoneNumber}</h2>
         <div className="my-10">
           <div className="grid grid-cols-2 gap-4">
             <h3 className="text-white text-xl font-semibold underline">
@@ -66,13 +75,15 @@ const Profile = () => {
           </div>
           <div className="my-10"></div>
           <label className="input input-bordered flex items-center gap-2">
-            <span className="brand-color">My Vault</span>
+            <span className="brand-color">My Vault(gram)</span>
             <input
               onChange={handleSell}
               type="number"
               className="grow ms-10"
               placeholder="Enter Amount in Gram"
               min="0"
+              value={CUser?.myVault}
+              readOnly
             />
           </label>
           <label className="input input-bordered flex items-center gap-2 mt-2">
