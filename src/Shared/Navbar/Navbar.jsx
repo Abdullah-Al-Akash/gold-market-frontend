@@ -165,8 +165,8 @@ const Navbar = () => {
         <div className="navbar-end relative">
           {user?.email ? (
             <>
-              <h3 className="brand-color font-semibold me-2">
-                {CUser?.myVault}
+              <h3 className="p-1 text-black me-2 text-sm bg-yellow-50 rounded">
+                My Vault: {CUser?.myVault} Gm
               </h3>
               <div className="avatar online">
                 <div className="w-12 rounded-full hover:cursor-pointer">

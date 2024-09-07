@@ -10,7 +10,7 @@ const Request = () => {
   const approveBtn = async (id, userId, requestType, amountInGm, amountInBdt) => {
     console.log(id);
     try {
-        const response = await fetch(`http://localhost:5000/request/${id}`, {
+        const response = await fetch(`https://gold-market-backend.onrender.com/request/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ const Request = () => {
             All Request
           </h3>
 
-          <div className="overflow-x-auto px-4 mx-auto my-10 lg:my-10">
+          <div className="overflow-x-auto w-full px-4 mx-auto my-10 lg:my-10">
             <table className="table mx-auto">
               {/* head */}
               <thead>

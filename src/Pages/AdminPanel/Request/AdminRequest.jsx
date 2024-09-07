@@ -6,7 +6,7 @@ const AdminRequest = () => {
     return (
         <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className="drawer-content flex flex-col items-center">
           {/* Page content here */}
           <label
             htmlFor="my-drawer-2"
@@ -14,7 +14,6 @@ const AdminRequest = () => {
           >
             Open drawer
           </label>
-          
           <Request></Request>
         </div>
         <div className="drawer-side">
