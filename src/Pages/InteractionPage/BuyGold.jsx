@@ -78,7 +78,7 @@ const BuyGold = () => {
 
       // If confirmed, make the POST request
       if (result.isConfirmed) {
-        const response = await fetch("https://gold-market-backend.onrender.com/buy", {
+        const response = await fetch("http://localhost:5000/buy", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -7,16 +7,16 @@ const Report = () => {
   const [inTermsOfGold, setInTermsOfGold] = useState(null);
   const [inTermsOfCash, setInTermsOfCash] = useState(null);
   const [earningComission, setEarningCommision] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [vaultLoading, setVaultLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { data } = useCurrentRate();
+  const { data,loading } = useCurrentRate();
   const userBuyRate = parseFloat(data?.userBuyRate);
 
   useEffect(() => {
     const fetchTotalVault = async () => {
       try {
         // Fetch the totalVault from the backend API
-        const response = await fetch("https://gold-market-backend.onrender.com/adminReport");
+        const response = await fetch("http://localhost:5000/adminReport");
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -31,14 +31,14 @@ const Report = () => {
         setError("Failed to fetch total vault amount.");
         console.error("Error fetching totalVault:", err);
       } finally {
-        setLoading(false);
+        setVaultLoading(false);
       }
     };
 
     fetchTotalVault();
   }, [totalVault]); // Empty dependency array means this useEffect runs once on mount
 
-  if (loading) {
+  if (vaultLoading || loading) {
     return <Loading></Loading>;
   }
 

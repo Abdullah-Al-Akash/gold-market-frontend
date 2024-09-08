@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const currentUser = (email) => {
-const url = `https://gold-market-backend.onrender.com/user?email=${email}`
+const url = `http://localhost:5000/user?email=${email}`
   const [CUser, setCUser] = useState(null);
   const [userLoading, setUserLoading] = useState(true);
   const [userError, setUserError] = useState(null);
