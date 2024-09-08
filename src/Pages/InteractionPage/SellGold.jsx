@@ -86,7 +86,7 @@ const SellGold = () => {
             icon: "error",
           })
         }
-        const response = await fetch("http://localhost:5000/buy", {
+        const response = await fetch("https://gold-market-backend.onrender.com/buy", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

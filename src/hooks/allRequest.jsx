@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const allRequest = () => {
-  const url = `http://localhost:5000/request`;
+  const url = `https://gold-market-backend.onrender.com/request`;
   const [request, setRequest] = useState([]);
   const [requestLoading, setRequestLoading] = useState(true);
   const [requestError, setRequestError] = useState(null);
@@ -31,7 +31,7 @@ const allRequest = () => {
     };
 
     fetchData();
-  }, [url]); // Dependency array is fine as `url` does not change
+  }, [url,request]); // Dependency array is fine as `url` does not change
 
   return { request, requestLoading, requestError, requestLength: request.length };
 };

@@ -3,7 +3,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 
 const transaction = () => {
     const {user} = useContext(AuthContext);
-    const url = `http://localhost:5000/transaction?email=${user?.email}`;
+    const url = `https://gold-market-backend.onrender.com/transaction?email=${user?.email}`;
     const [tHistory, setTHistory] = useState(null);
     const [tLoading, setTLoading] = useState(true);
     const [tError, setTError] = useState(null);

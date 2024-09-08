@@ -16,7 +16,7 @@ const Report = () => {
     const fetchTotalVault = async () => {
       try {
         // Fetch the totalVault from the backend API
-        const response = await fetch("http://localhost:5000/adminReport");
+        const response = await fetch("https://gold-market-backend.onrender.com/adminReport");
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

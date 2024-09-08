@@ -1,7 +1,7 @@
 // useFetchData.js
 import { useState, useEffect } from "react";
 
-const loadAllUser = (url = 'http://localhost:5000/users') => {
+const loadAllUser = (url = 'https://gold-market-backend.onrender.com/users') => {
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

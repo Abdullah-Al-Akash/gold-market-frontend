@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import allRequest from "../../../hooks/allRequest";
 import Loading from "../../Loading/Loading";
+import Swal from 'sweetalert2';
 
 const Request = () => {
   const { request, requestLoading, requestError } = allRequest();
@@ -9,6 +10,52 @@ const Request = () => {
   useEffect(() => {
     console.log("Rendered with searchTerm:", searchTerm);
   }, [searchTerm]);
+
+  const approveBtn = async (id, userId, requestType, amountInGm, amountInBdt) => {
+    // Display confirmation dialog
+    const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: "You are about to approve this request!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, approve it!'
+    });
+
+    if (result.isConfirmed) {
+        try {
+            const response = await fetch(`http://localhost:5000/request/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ status: "Approved", requestType, amountInGm, amountInBdt, userId }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            // Parse the response if needed
+            const data = await response.json();
+
+            // Show success alert
+            Swal.fire(
+                'Approved!',
+                'The request has been approved.',
+                'success'
+            );
+        } catch (error) {
+            // Show error alert
+            Swal.fire(
+                'Error!',
+                'Something went wrong. Please try again.',
+                'error'
+            );
+        }
+    }
+};
 
   if (requestLoading) {
     return <Loading />;
